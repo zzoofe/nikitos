@@ -24,6 +24,13 @@ close.addEventListener('click', () => {
 //Валидация
 function toValidation(form){
     let result = true
+
+    // Удаляем все предупрежедния
+    function remove() {
+        const error = form.querySelectorAll('.error')
+        error.forEach(item=>item.remove())
+    }
+
 //Проверка на пустые строки
    function errorForm(){
        const allInputs = form.querySelectorAll('input') // Находим все input в форме
@@ -123,6 +130,7 @@ function toValidation(form){
    }
 //Форма Логина
 
+    remove()
    errorForm()
    mailForm()
    validPass()
@@ -168,6 +176,21 @@ function toSendRegForm(){
 
 toSendRegForm()
 
+// Авторизация
+function login() {
+    authorizationsForm.addEventListener('submit', function () {
+        const login = document.getElementById('login').value
+        const pass = document.getElementById('autho-pass').value
+        const data = JSON.parse(localStorage.login);
+
+        if (login === data.eMail && pass === data.pass) {
+            console.log('Авторизация успешна')
+        } else {
+            console.log('Авторизация не прошла')
+        }
+    })
+}
+login()
 
 // function login(){
 //     // const login = document.getElementById('login').value
